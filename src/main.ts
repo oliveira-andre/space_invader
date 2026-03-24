@@ -106,7 +106,7 @@ import { Application, Assets, Sprite, Graphics } from "pixi.js";
     enemy.width = 150;
     enemy.height = 100;
 
-    enemy.position.set((app.screen.width / 3) + (i * 400), app.screen.height / 5 - TOP_PADDING);
+    enemy.position.set((app.screen.width / 2.5) + (i * 400), app.screen.height / 5 - TOP_PADDING);
     app.stage.addChild(enemy);
   }
   for (let i = 0; i < enemiesSpaceInvaderGreen.length; i++) {
@@ -115,7 +115,7 @@ import { Application, Assets, Sprite, Graphics } from "pixi.js";
     enemy.width = 150;
     enemy.height = 100;
 
-    enemy.position.set((app.screen.width / 4) + (i * 350), app.screen.height / 3 - TOP_PADDING);
+    enemy.position.set((app.screen.width / 3.5) + (i * 350), app.screen.height / 3 - TOP_PADDING);
     app.stage.addChild(enemy);
   }
 
@@ -125,7 +125,7 @@ import { Application, Assets, Sprite, Graphics } from "pixi.js";
     enemy.width = 150;
     enemy.height = 100;
 
-    enemy.position.set((app.screen.width / 5) + (i * 300), app.screen.height / 2 - TOP_PADDING);
+    enemy.position.set((app.screen.width / 4.5) + (i * 300), app.screen.height / 2 - TOP_PADDING);
     app.stage.addChild(enemy);
   }
 
