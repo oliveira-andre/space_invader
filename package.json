@@ -10,10 +10,13 @@
     "dev": "vite"
   },
   "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "onnxruntime-web": "^1.24.3",
     "pixi.js": "^8.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/dom-webcodecs": "^0.1.18",
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
