@@ -139,7 +139,7 @@ let enemyDirection: 1 | -1 = 1;
         return null;
     }
 
-    buildLayout(app)
+    const { updateHUD } = buildLayout(app);
 
     // ─── Ship & bullet ────────────────────────────────────────────────────────
 
@@ -178,6 +178,7 @@ let enemyDirection: 1 | -1 = 1;
         }
         if (data.type === 'prediction') {
             console.log(`📦 prediction id=${data.id} label="${data.label}" score=${data.score}% pos=(${data.x.toFixed(0)},${data.y.toFixed(0)})`);
+            updateHUD({ score: Number(data.score), x: data.x, y: data.y });
             handleYoloPrediction(data);
         }
     });
