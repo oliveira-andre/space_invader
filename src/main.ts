@@ -167,8 +167,9 @@ let enemyDirection: 1 | -1 = 1;
 
     // ── YOLO autopilot state ─────────────────────────────────────────────────
     // When a prediction arrives, the ship steers toward that X and fires once.
-    let aiTargetX:    number | null = null; // canvas-X the ship should reach
-    let aiShouldFire: boolean       = false; // fire when aligned
+    let aiTargetX:     number | null = null; // canvas-X the ship should reach
+    let aiTargetScore: number = 0;
+    let aiShouldFire:  boolean       = false; // fire when aligned
 
     worker.addEventListener('message', ({ data }: MessageEvent<WorkerOutMessage>) => {
         if (data.type === 'model-loaded') {
@@ -208,9 +209,16 @@ let enemyDirection: 1 | -1 = 1;
         // Pick the highest-confidence target each scan.
         // The ship will steer toward its X and fire once aligned.
         const scoreNum = parseFloat(prediction.score);
-        if (aiTargetX === null || scoreNum > (parseFloat(prediction.score) ?? 0)) {
-            aiTargetX    = prediction.x;
-            aiShouldFire = true;
+
+        // this should bring more accuracy
+        // but it just fires when the AI is more sure (higher score) about the target.
+        // it makes sometimes it search for other target, instead of the closest.
+        // if (aiTargetX === null || scoreNum > aiTargetScore) {
+
+        if (aiTargetX === null) {
+            aiTargetX     = prediction.x;
+            aiTargetScore = scoreNum;
+            aiShouldFire  = true;
             console.log(`🤖 AI targeting x=${prediction.x.toFixed(0)} label="${prediction.label}" score=${prediction.score}%`);
         }
     }
@@ -292,8 +300,11 @@ let enemyDirection: 1 | -1 = 1;
                 outer: for (const row of rows) {
                     for (const enemy of row.sprites) {
                         if (!enemy.parent) continue;
+                        // bb bullet bounds
+                        // eb enemy bounds
                         const eb = enemy.getBounds();
-                        if (bb.maxX > eb.minX && bb.minX < eb.maxX && bb.maxY > eb.minY && bb.minY < eb.maxY) {
+                        const collision = bb.maxX > eb.minX && bb.minX < eb.maxX && bb.maxY > eb.minY && bb.minY < eb.maxY
+                        if (collision) {
                             app.stage.removeChild(bullet);
                             app.stage.removeChild(enemy);
                             bulletActive = false;
