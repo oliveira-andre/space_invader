@@ -1,3 +1,3 @@
 # Space Invaders
 
-![Demo Example](/example.png)
+![Demo Example](/demo.gif)
